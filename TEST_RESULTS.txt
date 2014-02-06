@@ -1,0 +1,372 @@
+Author:  Tony Ling
+Summary: This file includes the results for 3 Sokoban Levels after 
+         running the program.
+         
+Test Summary (Actual Results Below):
+
+  Key: BFS    = Breadth First Search
+       DFS    = Depth First Search
+       UCS    = Uniform Cost Search
+       GBFSH1 = Greedy Best First Search w/ Heuristics Function 1
+       GBFSH2 = Greedy Best First Search w/ Heuristics Function 2
+       ASH1   = A* Search w/ Heuristics Function 1
+       ASH2   = A* Search w/ Heuristics Function 2
+       
+  Test 1:
+    Run Time Divided by BFS Run Time:
+      BFS    DFS     UCS    GBFSH1   ASH1   GBFSH2   ASH2
+      1.0  28.8390  2.7275  0.0019  0.0084  0.3640  0.3652
+    Optimal compared to BFS:
+      BFS  DFS  UCS  GBFSH1  ASH1  GBFSH2  ASH2
+      Yes  No   Yes    No    Yes    Yes    Yes
+    Comments:
+      DFS is shown to be inadequate with this level due to it's depth.
+      UCS is considered optimal since the path cost would have been
+      identical to bfs's path cost if the push cost was 2.
+      While A* search and greedy best first search with heuristics
+      function 1 and A* search with heuristics function 2 have optimal
+      solutions, A* search with heuristics function 1 is about 44 times
+      faster than greedy best first search with heuristics function 2.
+      
+  Test 2:
+    Run Time Divided by BFS Run Time:
+      BFS    DFS     UCS    GBFSH1   ASH1   GBFSH2   ASH2
+      1.0   0.3715  1.0829  0.0384  0.0285  0.0486  0.0480
+    Optimal compared to BFS:
+      BFS  DFS  UCS  GBFSH1  ASH1  GBFSH2  ASH2
+      Yes  No   Yes    No    No    Yes     Yes
+    Comments:
+      At 110+ seconds, a BFS or UCS for this level is inadequate since
+      searches with heuristics function 2 also produce an optimal
+      solution at almost 21 times faster.
+      
+  Test 3:
+    Run Time Divided by BFS Run Time:
+      BFS    DFS     UCS    GBFSH1   ASH1   GBFSH2   ASH2
+      1.0   0.2766  1.1125  0.1401  0.5927  0.1181  0.1201
+    Optimal compared to BFS:
+      BFS  DFS  UCS  GBFSH1  ASH1  GBFSH2  ASH2
+      Yes  No   Yes    No    No    Yes     Yes
+    Comments:
+      Heuristics function 2 outperforms heuristics function 1 when
+      there are many unsafe positions, yet many boxes and goals in a
+      relatively smaller area.
+
+
+TEST CASE 1:
+
+Sokoban level input:
+11
+#####
+#   #
+# $ #
+#   # 
+#   # 
+#   ##
+#     #
+# @*. #
+#     #
+#     #
+######
+
+BREADTH FIRST SEARCH:
+  Solution: 
+    r, u, u, u, u, u, u, l, d, d, d, d, d, l, d, r
+    # of nodes generated: 4634
+    # of duplicate states generated: 6319
+    # of fringe nodes when termination occured: 1184
+    # of explored nodes: 3449
+  Actual run time: 1.77724 seconds
+
+DEPTH FIRST SEARCH:
+  Solution: 
+    u, u, u, u, r, u, u, l, d, r, d, d, d, d, r, r, d, d, d, l, l, u, u, 
+    u, u, u, u, d, d, d, r, r, d, d, d, l, l, u, l, u, l, u, u, u, u, u, 
+    u, r, r, d, d, u, u, l, l, d, d, d, r, u, r, u, u, l, l, d, r, d, r, 
+    d, u, l, u, u, r, d, u, l, l, d, d, r, d, r, d, u, u, d, l, d, d, r, 
+    u, u, u, l, u, u, r, d, u, l, l, d, d, r, d, r, d, d, d, r, r, u, l, 
+    r, d, d, d, l, l, u, u, l, u, l, u, u, u, u, u, r, r, d, d, u, u, l, 
+    l, d, d, d, r, d, r, d, u, u, u, d, d, d, r, r, d, d, d, l, l, u, u, 
+    r, u, l, u, u, u, l, u, u, r, d, u, l, l, d, d, r, d, d, d, u, u, u, 
+    u, r, d, u, u, l, l, d, d, d, r, d, r, d, r, r, d, d, d, l, l, u, l, 
+    u, u, u, r, u, u, d, d, d, r, r, d, d, d, l, l, u, l, u, l, u, u, u, 
+    u, u, u, r, r, d, u, l, l, d, d, r, d, u, u, r, d, d, u, u, u, l, l, 
+    d, d, d, d, d, r, u, u, u, r, u, u, l, d, d, r, d, d, u, u, u, u, l, 
+    l, d, d, d, d, d, r, r, u, u, u, u, u, l, l, d, d, d, d, d, d, r, d, 
+    r, r, u, r, u, l, l, u, u, u, l, d, r, d, d, r, r, d, d, d, l, l, u, 
+    l, u, l, u, u, r, u, r, d, u, u, u, u, l, l, d, d, d, d, d, d, r, r, 
+    u, r, r, d, d, d, l, l, u, l, u, l, u, r, r, d, r, r, d, d, l, l, l, 
+    u, l, u, u, u, u, u, u, u, r, r, d, d, d, d, d, u, u, u, u, u, l, l, 
+    d, d, d, d, d, d, r, r, u, u, u, u, u, u, l, l, d, d, d, d, d, d, d, 
+    r, d, r, r, u, r, u, u, l, r, d, d, d, l, l, u, u, u, u, u, u, d, d, 
+    d, r, r, d, d, d, l, l, u, l, u, l, u, u, u, u, u, u, r, r, d, u, l, 
+    l, d, d, d, d, r, d, r, r, r, d, l, r, d, d, l, l, u, l, u, u, u, l, 
+    u, u, u, u, r, r, d, d, u, u, l, l, d, d, d, d, d, d, r, r, d, r, r, 
+    u, u, l, d, u, l, u, u, u, d, d, d, r, r, d, d, d, l, l, u, l, u, l, 
+    u, u, u, u, u, u, r, r, d, u, l, l, d, d, d, d, r, d, r, r, r, d, d, 
+    l, u, u, l, u, u, u, d, d, d, r, r, d, d, d, l, l, l, u, u, l, u, u, 
+    u, u, u, u, r, r, d, d, u, u, l, l, d, d, d, r, d, r, d, r, r, d, d, 
+    l, l, u, u, u, u, u, d, d, d, r, r, d, d, d, l, l, l, u, r, u, u, l, 
+    d, l, u, u, u, u, u, u, r, r, d, d, d, u, u, u, l, l, d, d, d, d, r, 
+    d, r, r, r, d, d, d, l, l, l, u, l, u, r, u, r, d, u, r, r, d, d, d, 
+    l, l, l, u, r, u, u, r, r, d, d, d, l, u, d, l, l, u, u, l, u, u, u, 
+    u, u, u, r, r, d, d, d, d, d
+    # of nodes generated: 17097
+    # of duplicate states generated: 35313
+    # of fringe nodes when termination occured: 422
+    # of explored nodes: 16674
+  Actual run time: 42.3676 seconds
+
+UNIFORM COST SEARCH:
+  Solution: 
+    r, u, u, u, u, l, l, u, r, u, r, d, d, d, d, d
+    # of nodes generated: 6950
+    # of duplicate states generated: 11122
+    # of fringe nodes when termination occured: 1255
+    # of explored nodes: 5694
+  Actual run time: 4.84741 seconds
+
+GREEDY BEST FIRST SEARCH, HEURISTICS FUNCTION 1:
+  Solution: 
+    u, u, u, u, l, u, r, u, r, d, d, d, d, l, d, d, r, l, u, u, r, d
+    # of nodes generated: 84
+    # of duplicate states generated: 26
+    # of fringe nodes when termination occured: 50
+    # of explored nodes: 33
+  Actual run time: 0.003429 seconds
+
+A* SEARCH, HEURISTICS FUNCTION 1:
+  Solution: 
+    r, u, u, u, u, u, u, l, d, d, d, d, d, l, d, r
+    # of nodes generated: 234
+    # of duplicate states generated: 166
+    # of fringe nodes when termination occured: 108
+    # of explored nodes: 125
+  Actual run time: 0.014904 seconds
+
+GREEDY BEST FIRST SEARCH, HEURISTICS FUNCTION 2:
+  Solution: 
+    r, u, u, u, u, u, u, l, d, d, d, d, d, l, d, r
+    # of nodes generated: 2227
+    # of duplicate states generated: 2906
+    # of fringe nodes when termination occured: 618
+    # of explored nodes: 1608
+  Actual run time: 0.647047 seconds
+
+A* SEARCH, HEURISTICS FUNCTION 2:
+  Solution: 
+    r, u, u, u, u, u, u, l, d, d, d, d, d, l, d, r
+    # of nodes generated: 2227
+    # of duplicate states generated: 2906
+    # of fringe nodes when termination occured: 618
+    # of explored nodes: 1608
+  Actual run time: 0.649111 seconds
+
+TEST CASE 2:
+
+Sokoban level input:
+8
+##########
+#.#      #
+# #@$ $  #
+# #      #
+#.#####  #
+#        #
+#        #
+##########
+
+BREADTH FIRST SEARCH:
+  Solution: 
+    r, u, r, d, r, u, r, d, d, d, r, d, l, l, l, l, l, l, d, l, u, u, u, 
+    u, d, d, d, r, r, r, r, r, r, u, u, u, l, l, l, d, r, r, u, r, d, d, 
+    r, d, l, l, l, l, l, l, d, l, u
+    # of nodes generated: 28649
+    # of duplicate states generated: 53118
+    # of fringe nodes when termination occured: 105
+    # of explored nodes: 28543
+  Actual run time: 110.126 seconds
+
+DEPTH FIRST SEARCH:
+  Solution: 
+    u, r, r, r, r, d, l, u, l, d, u, r, r, r, d, d, l, l, l, u, u, l, l, 
+    d, r, r, u, r, d, l, d, r, u, u, r, r, d, d, d, l, u, r, u, u, l, l, 
+    l, d, l, l, d, r, u, u, r, r, r, r, d, l, u, l, l, d, l, d, r, u, u, 
+    r, r, d, l, u, r, r, d, d, l, l, r, u, u, l, l, l, d, d, r, r, u, u, 
+    r, r, d, d, d, l, u, r, u, u, l, l, d, l, u, r, r, d, u, l, l, l, d, 
+    l, d, r, r, u, u, r, r, d, d, d, u, u, u, l, l, d, d, r, u, u, r, r, 
+    d, d, d, d, l, u, u, r, u, u, l, d, r, d, l, r, d, d, l, l, r, u, u, 
+    u, u, l, l, d, d, r, u, u, r, r, d, d, d, l, u, r, u, l, r, d, d, d, 
+    d, l, l, u, l, r, r, u, u, u, u, l, d, u, r, r, d, d, l, l, u, u, r, 
+    r, d, d, d, d, d, l, l, u, l, l, r, r, r, u, u, u, u, l, l, d, l, d, 
+    r, u, u, r, r, r, d, d, d, d, d, l, l, u, l, l, l, r, r, r, r, u, u, 
+    u, u, l, l, d, d, r, u, u, r, r, d, d, d, d, d, l, l, u, l, l, d, l, 
+    l, l, u, r, r, d, r, r, u, r, r, u, u, r, u, u, l, d, d, r, d, d, d, 
+    l, l, u, l, l, r, r, r, u, u, r, u, u, l, d, d, d, r, d, d, l, l, u, 
+    l, l, d, l, l, u, r, r, r, d, r, r, u, l, r, r, u, u, l, d, r, d, d, 
+    l, l, u, l, r, d, r, r, u, l, d, l, l, u, l, l, r, r, r, d, r, u, r, 
+    u, u, l, d, r, d, l, l, d, l, l, u, l, l, r, r, r, r, d, r, u, u, u, 
+    r, u, u, l, d, r, d, l, r, d, d, d, l, l, u, l, l, d, l, l, l, u, u, 
+    u, u, d, d, d, r, r, r, r, r, r, u, u, u, u, l, l, d, d, r, u, r, d, 
+    d, r, d, l, l, l, l, l, l, d, l, u
+    # of nodes generated: 17721
+    # of duplicate states generated: 32067
+    # of fringe nodes when termination occured: 318
+    # of explored nodes: 17402
+  Actual run time: 40.9114 seconds
+
+UNIFORM COST SEARCH:
+  Solution: 
+    r, u, r, d, r, u, r, d, d, d, r, d, l, l, l, l, l, l, d, l, u, u, u, 
+    u, d, d, d, r, r, r, r, r, r, u, u, u, l, l, l, d, r, r, u, r, d, d, 
+    r, d, l, l, l, l, l, l, d, l, u
+    # of nodes generated: 28808
+    # of duplicate states generated: 53570
+    # of fringe nodes when termination occured: 62
+    # of explored nodes: 28745
+  Actual run time: 119.251 seconds
+  
+GREEDY BEST FIRST SEARCH, HEURISTICS FUNCTION 1:
+  Solution: 
+    u, r, d, r, r, u, r, d, d, d, r, d, l, l, l, l, l, l, d, l, u, r, r, 
+    r, r, r, r, u, u, l, l, u, l, l, d, r, r, r, u, r, d, d, r, d, l, l, 
+    l, l, l, d, l, l, u, u, u, u, d, d, d, d, r, r, u, l, d, l, u
+    # of nodes generated: 6566
+    # of duplicate states generated: 11264
+    # of fringe nodes when termination occured: 461
+    # of explored nodes: 6104
+  Actual run time: 4.2349 seconds
+  
+A* SEARCH, HEURISTICS FUNCTION 1:
+  Solution: 
+    u, r, d, r, r, u, r, d, d, d, r, d, l, l, l, l, l, l, d, l, u, u, u, 
+    u, d, d, d, r, r, r, r, r, r, u, u, l, l, u, l, l, d, r, r, r, u, r, 
+    d, d, r, d, l, l, l, l, l, l, d, l, u
+    # of nodes generated: 4347
+    # of duplicate states generated: 6734
+    # of fringe nodes when termination occured: 683
+    # of explored nodes: 3663
+  Actual run time: 2.03985 seconds
+  
+GREEDY BEST FIRST SEARCH, HEURISTICS FUNCTION 2:
+  Solution: 
+    r, u, r, d, r, u, r, d, d, d, r, d, l, l, l, l, l, l, d, l, u, u, u, 
+    u, d, d, d, r, r, r, r, r, r, u, u, u, l, l, l, d, r, r, u, r, d, d, 
+    r, d, l, l, l, l, l, l, d, l, u
+    # of nodes generated: 6865
+    # of duplicate states generated: 12251
+    # of fringe nodes when termination occured: 230
+    # of explored nodes: 6634
+  Actual run time: 5.35482 seconds
+  
+A* SEARCH, HEURISTICS FUNCTION 2:
+  Solution: 
+    r, u, r, d, r, u, r, d, d, d, r, d, l, l, l, l, l, l, d, l, u, u, u, 
+    u, d, d, d, r, r, r, r, r, r, u, u, u, l, l, l, d, r, r, u, r, d, d, 
+    r, d, l, l, l, l, l, l, d, l, u
+    # of nodes generated: 6865
+    # of duplicate states generated: 12251
+    # of fringe nodes when termination occured: 230
+    # of explored nodes: 6634
+  Actual run time: 5.29084 seconds
+
+TEST CASE 3:
+
+Sokoban level input:
+8
+######
+#  . #
+#    ###
+# #$$. #
+#.  ## #
+#@$ ## #
+###    #
+  ######
+
+BREADTH FIRST SEARCH:
+  Solution: 
+    u, r, r, u, d, d, d, r, r, r, u, u, u, l, l, u, u, l, l, d, r, l, l, 
+    d, d, d, r, u, r, u, r, r, r, d, d, d, l, l, l, u, u, l, l, u, u, u, 
+    r, r, r, d, l, u, l, l, d, d, d, r, r, u, r, l, u, l, u, l, d, d
+    # of nodes generated: 16734
+    # of duplicate states generated: 23012
+    # of fringe nodes when termination occured: 275
+    # of explored nodes: 16458
+  Actual run time: 30.1743 seconds
+
+DEPTH FIRST SEARCH:
+  Solution: 
+    u, r, r, u, u, r, u, l, d, d, r, u, l, l, l, u, r, d, r, d, d, d, d, 
+    r, r, r, u, u, u, l, l, u, u, l, r, d, d, r, r, d, d, d, l, l, l, u, 
+    u, u, r, u, l, r, d, r, r, d, d, d, l, l, l, u, u, l, l, u, u, u, r, 
+    l, d, r, l, d, d, r, r, u, r, u, l, r, d, r, r, d, d, d, l, l, l, u, 
+    u, l, l, d, r, u, r, u, u, r, u, l, r, d, d, r, r, d, d, d, l, l, l, 
+    u, u, u, r, u, u, l, d, d, d, l, l, u, u, u, r, l, d, r, l, d, d, r, 
+    r, u, r, u, u, l, r, d, d, r, r, d, d, d, l, l, l, u, u, d, l, l, u, 
+    u, u, r, r, u, r, d, l, d, u, l, l, u, r, d, r, d, r, u, u, l, d, l, 
+    l, u, r, d, l, d, d, r, d, r, u, u, r, u, u, l, r, d, l, d, d, d, d, 
+    r, r, r, u, u, u, l, r, d, d, d, l, l, l, u, u, l, l, u, u, u, r, l, 
+    d, d, d, r, r, u, u, l, u, l, d, r, r, r, u, l, d, d, r, u, l, l, l, 
+    u, r, d, l, d
+    # of nodes generated: 10153
+    # of duplicate states generated: 14002
+    # of fringe nodes when termination occured: 92
+    # of explored nodes: 10060
+  Actual run time: 8.34676 seconds
+  
+UNIFORM COST SEARCH:
+  Solution: 
+    u, r, r, u, d, d, d, r, r, r, u, u, u, l, l, u, u, l, l, d, r, l, l, 
+    d, d, d, r, u, r, u, r, r, r, d, d, d, l, l, l, u, u, l, l, u, u, u, 
+    r, r, r, d, l, u, l, l, d, d, d, r, r, u, r, l, u, l, u, l, d, d
+    # of nodes generated: 16983
+    # of duplicate states generated: 23389
+    # of fringe nodes when termination occured: 244
+    # of explored nodes: 16738
+  Actual run time: 33.5702 seconds
+  
+GREEDY BEST FIRST SEARCH, HEURISTICS FUNCTION 1:
+  Solution: 
+    u, r, r, u, u, d, r, l, d, d, d, r, r, r, u, u, u, l, l, u, l, l, l, 
+    d, d, d, r, u, r, u, r, r, r, d, d, d, l, l, l, u, u, d, d, r, r, r, 
+    u, u, u, l, l, u, u, l, r, d, d, r, r, d, d, d, l, l, l, u, u, l, l, 
+    u, u, r, r, u, r, d, l, d, r, l, u, l, l, u, r, d, l, d, d, r, d, r, 
+    u, u, r, u, l, l, u, l, d, d
+    # of nodes generated: 7147
+    # of duplicate states generated: 8693
+    # of fringe nodes when termination occured: 623
+    # of explored nodes: 6523
+  Actual run time: 4.22741 seconds
+
+A* SEARCH, HEURISTICS FUNCTION 1:
+  Solution: 
+    u, r, r, u, r, l, d, d, d, r, r, r, u, u, u, l, l, u, u, l, l, d, r, 
+    l, l, d, d, d, r, u, r, u, r, r, r, d, d, d, l, l, l, u, u, l, l, u, 
+    u, r, u, r, r, d, l, d, r, l, u, u, l, l, d, d, d, r, d, r, u, u, u, 
+    l, u, l, d, d
+    # of nodes generated: 13005
+    # of duplicate states generated: 17375
+    # of fringe nodes when termination occured: 474
+    # of explored nodes: 12530
+  Actual run time: 17.884 seconds
+  
+GREEDY BEST FIRST SEARCH, HEURISTICS FUNCTION 2:
+  Solution: 
+    u, r, r, u, d, d, d, r, r, r, u, u, u, l, l, u, u, l, l, d, r, l, l,
+    d, d, d, r, u, r, u, r, r, r, d, d, d, l, l, l, u, u, l, l, u, u, u,
+    r, r, r, d, l, u, l, l, d, d, d, r, r, u, r, l, u, l, u, l, d, d
+    # of nodes generated: 6246
+    # of duplicate states generated: 7571
+    # of fringe nodes when termination occured: 517
+    # of explored nodes: 5728
+  Actual run time: 3.56292 seconds
+  
+A* SEARCH, HEURISTICS FUNCTION 2:
+  Solution: 
+    u, r, r, u, d, d, d, r, r, r, u, u, u, l, l, u, u, l, l, d, r, l, l, 
+    d, d, d, r, u, r, u, r, r, r, d, d, d, l, l, l, u, u, l, l, u, u, u, 
+    r, r, r, d, l, u, l, l, d, d, d, r, r, u, r, l, u, l, u, l, d, d
+    # of nodes generated: 6246
+    # of duplicate states generated: 7571
+    # of fringe nodes when termination occured: 517
+    # of explored nodes: 5728
+  Actual run time: 3.62275 seconds
